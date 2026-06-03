@@ -1,0 +1,149 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:url("../img_1.png") no-repeat center center;
+    background-size:cover;
+    padding:20px;
+}
+
+.signature-page{
+    max-width:700px;
+    margin:auto;
+}
+
+.page-title{
+    text-align:center;
+    color:#173B8B;
+    margin-bottom:30px;
+}
+
+.page-title h1{
+    font-size:2.5rem;
+    font-weight:700;
+}
+
+.page-title::after{
+    content:"";
+    display:block;
+    width:80px;
+    height:4px;
+    background:#2D6CDF;
+    margin:10px auto;
+    border-radius:20px;
+}
+
+/* Cartes blanches */
+.card-custom{
+    background:white;
+    border-radius:25px;
+    padding:30px;
+    margin-bottom:25px;
+    box-shadow:0 10px 35px rgba(0,0,0,0.15);
+}
+
+.card-title{
+    color:#2D6CDF;
+    font-size:1.5rem;
+    font-weight:700;
+    margin-bottom:25px;
+}
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+    font-size:1.1rem;
+}
+
+.info-label{
+    font-weight:600;
+}
+
+/* Zone signature */
+.signature-wrapper{
+    margin-top:20px;
+}
+
+.signature-pad{
+    width:100%;
+    height:300px;
+    border:2px solid #E5E7EB;
+    border-radius:20px;
+    background:white;
+    box-shadow:inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.signature-help{
+    text-align:center;
+    margin-top:15px;
+    color:#6B7280;
+}
+
+/* Boutons */
+.actions{
+    display:flex;
+    gap:20px;
+    margin-top:25px;
+}
+
+.btn-sign{
+    flex:1;
+    background:#2563EB;
+    color:white;
+    border:none;
+    padding:16px;
+    border-radius:15px;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-sign:hover{
+    transform:translateY(-2px);
+}
+
+.btn-clear{
+    flex:1;
+    background:white;
+    color:#EF4444;
+    border:2px solid #EF4444;
+    padding:16px;
+    border-radius:15px;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.alert{
+    margin-top:20px;
+    padding:15px;
+    border-radius:12px;
+}
+
+/* Mobile */
+@media(max-width:768px){
+
+    .page-title h1{
+        font-size:2rem;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+
+    .card-custom{
+        padding:20px;
+    }
+
+    .info-row{
+        flex-direction:column;
+        gap:5px;
+    }
+}
