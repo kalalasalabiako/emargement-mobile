@@ -1,0 +1,114 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background: url('/background/img.png') no-repeat center/cover;
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 20px;
+}
+
+.sidebar h3 {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.sidebar a:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Main */
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Top bar */
+.topbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.session {
+    background: #ddd;
+    padding: 8px 20px;
+    border-radius: 20px;
+}
+
+/* Card */
+.card {
+    background: #4a5aa3;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.table {
+    background: #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    color: black;
+}
+
+.table div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Session list */
+.session-list {
+    background: #4a5aa3;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.session-item {
+    background: #eee;
+    margin: 10px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+}
+
+button {
+    background: orange;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: darkorange;
+}
+
+/* Logout */
+.logout {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ccc;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+}

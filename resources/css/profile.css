@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+/* BACKGROUND IMAGE */
+ body {
+               height: 100vh;
+               background: url("background/img_1.png") no-repeat center center/cover;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               position: relative;
+           }
+
+/* CONTAINER */
+.container {
+    padding: 40px;
+}
+
+/* HEADER */
+.header {
+    position: relative;
+}
+
+.header h1 {
+    margin-bottom: 5px;
+}
+
+.btn-top {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background: rgba(255,255,255,0.3);
+    color: white;
+    cursor: pointer;
+}
+
+/* CONTENT */
+.content {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+/* FORM CARD */
+.form-card {
+    background: rgba(100, 120, 200, 0.5);
+    padding: 25px;
+    border-radius: 15px;
+    width: 350px;
+    backdrop-filter: blur(10px);
+}
+
+.form-card input,
+.form-card textarea {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
+.form-card textarea {
+    height: 120px;
+}
+
+/* BUTTONS */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.cancel {
+    background: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.confirm {
+    background: #6c8cff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: white;
+}
+
+/* PREVIEW */
+.preview-card {
+    background: rgba(100, 120, 200, 0.5);
+    padding: 20px;
+    border-radius: 15px;
+    width: 300px;
+    backdrop-filter: blur(10px);
+}
+
+.preview-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* PAGINATION */
+.pagination {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.pagination button {
+    margin: 0 10px;
+    padding: 5px 10px;
+}
