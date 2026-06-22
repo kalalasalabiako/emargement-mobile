@@ -4,82 +4,72 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Http\Client\ConnectionException;
-
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Str;
-
 
 class ApiAuthController extends Controller
 {
     public function login(Request $request)
     {
-    $data = $request->validate([
-    'email' => ['required', 'email'],
-    'password' => ['required', 'string'],
-    ]);
+        $data = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string'],
+        ]);
 
-    $response = Http::baseUrl(config('services.api.url'))
-    ->acceptJson()
-    ->post("/auth/login", $data);
+        $response = Http::baseUrl(config('services.api.url'))
+            ->acceptJson()
+            ->post('/auth/login', $data);
 
-    if (! $response->successful()) {
-    return back()
-    ->with('error', 'Email ou mot de passe incorrect.');
+        if (! $response->successful()) {
+            return back()->with('error', 'Email ou mot de passe incorrect.');
+        }
+
+        $payload = $response->json();
+
+        $token = $payload['token'] ?? null;
+        $userData = $payload['user'] ?? null;
+
+        if (! $token || ! $userData) {
+            return back()->with('error', 'Réponse inattendue du serveur.');
+        }
+
+        $user = User::updateOrCreate(
+            ['email' => $userData['email']],
+            [
+                'name' => $userData['name'] ?? $userData['email'],
+                'password' => Str::random(40),
+            ]
+        );
+
+        Auth::login($user);
+
+        Session::put('remote_auth_token', $token);
+        Session::put('remote_user', $userData);
+
+        return redirect()->intended('accueil');
     }
 
-    $payload = $response->json();
+    public function logout(Request $request)
+    {
+        $token = Session::get('remote_auth_token');
 
-    // Token from App A
-    $token = $payload['token'] ?? null;
-    $userData = $payload['user'] ?? null;
+        if ($token) {
+            Http::baseUrl(config('services.api.url'))
+                ->acceptJson()
+                ->withToken($token)
+                ->post('/auth/logout');
+        }
 
-    if (! $token || ! $userData) {
-    return back()
-    ->with('error', 'Unexpected response from auth service.');
+        Session::forget('remote_auth_token');
+        Session::forget('remote_user');
+
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
     }
-
-    // Option A: create / sync a local user in App B (by email)
-    $user = User::updateOrCreate(
-    [
-    'email' => $userData['email']
-    ],
-    [
-    'name' => $userData['name'] ?? $userData['email'],
-    // Dummy local password: never used, but satisfies NOT NULL
-    'password' => Str::random(40),
-    ]
-    );
-
-    // Log the user into App B using the local user model
-    Auth::login($user);
-
-    // Store the remote token in session so App B can call App A as this user
-    Session::put('remote_auth_token', $token);
-
-    return redirect()->intended('accueil');
-    }
-
-public function logout(Request $request)
-{
-$token = Session::get('remote_auth_token');
-
-if ($token) {
-Http::baseUrl(config('services.api.url'))
-->acceptJson()
-->post("/auth/logout/{$token}");
-}
-
-Session::forget('remote_auth_token');
-
-Auth::logout();
-$request->session()->invalidate();
-$request->session()->regenerateToken();
-
-return redirect()->route('accueil');
-}
-    //
 }
